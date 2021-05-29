@@ -242,6 +242,3 @@ class SearchByShape(component):
             Polygon = self.retrieve_polygon(self.OpenPlansData['response'], PlanIndex)
         
         return ImageURL, Polygon, BuildingName, BuildingMetrics
-#
-#sbs = SearchByShape()
-#image_url, building_name, building_metrics, polygon = sbs.RunScript(SearchShape, SearchReload, PlanIndex, ImportPlan)
