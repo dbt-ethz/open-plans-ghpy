@@ -17,4 +17,4 @@ jobs:
           nuget install Grasshopper -OutputDirectory ./lib -source https://api.nuget.org/v3/index.json
       - name: Run
         run: |
-          ipy componentize.py src build
+          ipy componentize.py src grasshopper
