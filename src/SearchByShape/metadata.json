@@ -1,0 +1,96 @@
+{
+    "name": "SearchByShape",
+    "nickname": "search",
+    "category": "Componentizer",
+    "subcategory": "ALL",
+    "description": "Interact with Open Plans with geometrical search.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "SearchShape",
+                "nickname": "shape",
+                "description": "Closed Polyline of desired geometrical floor plan search.",
+                "optional": false,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "faint",
+                "sourceCount": 0,
+                "typeHintID": "polyline"
+            },
+            {
+                "name": "SearchReload",
+                "nickname": "reload",
+                "description": "Reload Open Plans API response.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool"
+            },
+            {
+                "name": "PlanIndex",
+                "nickname": "planId",
+                "description": "Value between 0 and 20 to retrieve one of the 20 floor plans from the Open Plans API repsonse.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "faint",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            },
+            {
+                "name": "ImportPlan",
+                "nickname": "import",
+                "description": "If True floor plan is imported into Rhino.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "faint",
+                "sourceCount": 0,
+                "typeHintID": "bool"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "ImageURL",
+                "nickname": "image",
+                "description": "Image URL of the retrieved floor plan from Open Plans database.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "Polygon",
+                "nickname": "brep",
+                "description": "Brep of retrieved floor plan.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "BuildingName",
+                "nickname": "name",
+                "description": "Name of building of the retrieved floor plan.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "BuildingMetrics",
+                "nickname": "metrics",
+                "description": "Building metrics of the retrieved floor plan.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

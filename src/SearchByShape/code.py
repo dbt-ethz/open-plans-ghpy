@@ -225,9 +225,9 @@ class SearchByShape(component):
         # print input search shape metrics
         self.getOriginalMetrics(self.OpenPlansData['response'])
 
-        image_url = self.retrieve_image_url(self.OpenPlansData['response'], PlanIndex)
-        building_name = self.retrieve_building_names(self.OpenPlansData['response'], PlanIndex)
-        building_metrics = self.getMetrics(self.OpenPlansData['response'], PlanIndex)
+        ImageURL = self.retrieve_image_url(self.OpenPlansData['response'], PlanIndex)
+        BuildingName = self.retrieve_building_names(self.OpenPlansData['response'], PlanIndex)
+        BuildingMetrics = self.getMetrics(self.OpenPlansData['response'], PlanIndex)
 
 
         if ImportPlan is False:
@@ -238,10 +238,10 @@ class SearchByShape(component):
                 print(e)
         else:
             scale = self.getScale(self.OpenPlansData['response'], PlanIndex)
-            self.import_plan2rhino(image_url, scale)
-            polygon = self.retrieve_polygon(self.OpenPlansData['response'], PlanIndex)
+            self.import_plan2rhino(ImageURL, scale)
+            Polygon = self.retrieve_polygon(self.OpenPlansData['response'], PlanIndex)
         
-#        return image_url, building_name, building_metrics, polygon
+        return ImageURL, Polygon, BuildingName, BuildingMetrics
 #
 #sbs = SearchByShape()
 #image_url, building_name, building_metrics, polygon = sbs.RunScript(SearchShape, SearchReload, PlanIndex, ImportPlan)
