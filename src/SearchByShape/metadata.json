@@ -1,8 +1,8 @@
 {
     "name": "SearchByShape",
     "nickname": "search",
-    "category": "Componentizer",
-    "subcategory": "ALL",
+    "category": "OpenPlans",
+    "subcategory": "Database",
     "description": "Interact with Open Plans with geometrical search.",
     "exposure": 4,
 
@@ -15,7 +15,7 @@
         "inputParameters": [
             {
                 "name": "SearchShape",
-                "nickname": "shape",
+                "nickname": "SearchShape",
                 "description": "Closed Polyline of desired geometrical floor plan search.",
                 "optional": false,
                 "allowTreeAccess": true,
@@ -27,8 +27,8 @@
             },
             {
                 "name": "SearchReload",
-                "nickname": "reload",
-                "description": "Reload Open Plans API response.",
+                "nickname": "SearchReload",
+                "description": "True/False to reload Open Plans API response.",
                 "optional": true,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
@@ -39,7 +39,7 @@
             },
             {
                 "name": "PlanIndex",
-                "nickname": "planId",
+                "nickname": "PlanIndex",
                 "description": "Value between 0 and 20 to retrieve one of the 20 floor plans from the Open Plans API repsonse.",
                 "optional": true,
                 "allowTreeAccess": true,
@@ -51,7 +51,7 @@
             },
             {
                 "name": "ImportPlan",
-                "nickname": "import",
+                "nickname": "ImportPlan",
                 "description": "If True floor plan is imported into Rhino.",
                 "optional": true,
                 "allowTreeAccess": true,
@@ -65,28 +65,28 @@
         "outputParameters": [
             {
                 "name": "ImageURL",
-                "nickname": "image",
+                "nickname": "ImageURL",
                 "description": "Image URL of the retrieved floor plan from Open Plans database.",
                 "optional": false,
                 "sourceCount": 0
             },
             {
                 "name": "Polygon",
-                "nickname": "brep",
+                "nickname": "Polygon",
                 "description": "Brep of retrieved floor plan.",
                 "optional": false,
                 "sourceCount": 0
             },
             {
                 "name": "BuildingName",
-                "nickname": "name",
+                "nickname": "BuildingName",
                 "description": "Name of building of the retrieved floor plan.",
                 "optional": false,
                 "sourceCount": 0
             },
             {
                 "name": "BuildingMetrics",
-                "nickname": "metrics",
+                "nickname": "BuildingMetrics",
                 "description": "Building metrics of the retrieved floor plan.",
                 "optional": false,
                 "sourceCount": 0
