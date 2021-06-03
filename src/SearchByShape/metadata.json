@@ -33,7 +33,7 @@
                 "allowTreeAccess": false,
                 "showTypeHints": true,
                 "scriptParamAccess": "item",
-                "wireDisplay": "default",
+                "wireDisplay": "faint",
                 "sourceCount": 0,
                 "typeHintID": "bool"
             },
