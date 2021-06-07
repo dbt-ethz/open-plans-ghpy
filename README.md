@@ -16,7 +16,7 @@ Interact with open plans within Rhino/Grasshopper.
 
 ## Contributions
 
-### Build component using on the command line
+### Build components using the command line
 
 Build components using the COMPAS componentizer tool: https://github.com/compas-dev/compas-actions.ghpython_components .
 
