@@ -1,6 +1,6 @@
 # Open Plans Rhino Grasshopper
 
-Interact with open plans within Rhino/Grasshopper.
+Interact with Open Plans within Rhino/Grasshopper.
 
 #### Implemented features:
 - search-by-shape
