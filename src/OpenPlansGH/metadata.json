@@ -1,0 +1,65 @@
+{
+    "name": "OpenPlansGH",
+    "nickname": "openplans",
+    "category": "OpenPlans",
+    "subcategory": "Database",
+    "description": "Retrieve data from Open Plans with geometrical search.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "searchShape",
+                "nickname": "searchShape",
+                "description": "Closed Polyline as building outline to find similar plans.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "faint",
+                "sourceCount": 0,
+                "typeHintID": "polyline"
+            },
+            {
+                "name": "numberOfPlans",
+                "nickname": "numberOfPlans",
+                "description": "Value between 0 and 60; number of plans to retrieve.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "faint",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "projects",
+                "nickname": "projects",
+                "description": "List of open plans projects as dictionaries (not readable by Grasshopper).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "properties",
+                "nickname": "projectProperties",
+                "description": "Property values from open plans projects (readable by Grasshopper in tree structure).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "propertyNames",
+                "nickname": "propertyNames",
+                "description": "Property names from open plans projects (readable by Grasshopper in list).",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
