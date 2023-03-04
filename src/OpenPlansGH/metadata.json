@@ -28,7 +28,7 @@
             {
                 "name": "numberOfPlans",
                 "nickname": "numberOfPlans",
-                "description": "Value between 0 and 60; number of plans to retrieve.",
+                "description": "Value between 1 and 100; number of plans to retrieve.",
                 "optional": true,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
@@ -55,8 +55,8 @@
             },
             {
                 "name": "propertyNames",
-                "nickname": "propertyNames",
-                "description": "Property names from open plans projects (readable by Grasshopper in list).",
+                "nickname": "projectFields",
+                "description": "Project property field names from open plans projects (readable by Grasshopper in list).",
                 "optional": false,
                 "sourceCount": 0
             }

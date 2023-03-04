@@ -25,36 +25,13 @@ Retrieve floor plans from the Open Plans database with a geometircal search.
 
 # PYTHON LIBRARY IMPORTS
 import urllib2
-import json
-import os
-
-# GHPYTHON SDK IMPORTS
-from ghpythonlib.componentbase import executingcomponent as component
-import Grasshopper
-import GhPython
-import Rhino
-import Rhino.Geometry as rg
-import Rhino.Display as rd
-import scriptcontext
-
-
-
-# PYTHON LIBRARY IMPORTS
-import urllib2
 from urllib2 import HTTPError
 import json
-import os
 
 # GHPYTHON SDK IMPORTS
 from ghpythonlib.componentbase import executingcomponent as component
-import Grasshopper
-import GhPython
-import Rhino
 import Rhino.Geometry as rg
-import Rhino.Display as rd
-import scriptcontext
 import ghpythonlib.treehelpers as th
-from ghpythonlib.componentbase import executingcomponent as component
 
 
 class OpenPlansSearch:
@@ -143,6 +120,9 @@ class OpenPlansGH(component):
     def RunScript(self, searchShape, numberOfPlans):
 
         if not searchShape:
+            return None, None, None
+        
+        if numberOfPlans == 0:
             return None, None, None
 
         if searchShape.IsValid and searchShape.IsClosed:

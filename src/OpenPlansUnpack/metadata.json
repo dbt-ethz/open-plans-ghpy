@@ -1,0 +1,38 @@
+{
+    "name": "OpenPlansUnpack",
+    "nickname": "unpack",
+    "category": "OpenPlans",
+    "subcategory": "Data",
+    "description": "Unpack projects data from open plans.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "projects",
+                "nickname": "projects",
+                "description": "List of projects as python dictionaries.",
+                "optional": false,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "list",
+                "wireDisplay": "faint",
+                "sourceCount": 0
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "properties",
+                "nickname": "projectProperties",
+                "description": "Property values from open plans projects (readable by Grasshopper in tree structure).",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
