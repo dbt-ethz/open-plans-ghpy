@@ -56,7 +56,10 @@ class OpenPlansSearch:
                     raise Exception(" No plans are retrieved from the database ")
                 return ret_val['similar_plan_list']
         except HTTPError as e:
-            raise Exception(e)
+            if e.code == 503:
+                raise HTTPError(e.url, e.code, "It did not work this time, please try again.")
+            else:
+                raise
             
     def search_shape_to_polygon(self):
         polygon = self.format_polygon(x_coords=[x for x in self.searchShape.X], y_coords=[y*-1 for y in self.searchShape.Y])
