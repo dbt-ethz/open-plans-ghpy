@@ -87,9 +87,7 @@ class OpenPlansItem:
         self.floor = data['floor']
         self.geolocation = self.format_geolocation(data['geolocation'])
         self.height = data['height']
-        self.image_path = data['image_path']
-        self.project_id = data['project_id']
-        self.plan_id = data['plan_id']
+
             
     def get_polygon_area(self):
         try:
