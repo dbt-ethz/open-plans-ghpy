@@ -84,7 +84,7 @@ class OpenPlansItem:
         self.year_of_completion = data['year_of_completion']
         self.floor_area = self.get_polygon_area()
         self.floors = data['floors']
-        self.floor = data['floor']
+        self.level = data['floor']
         self.geolocation = self.format_geolocation(data['geolocation'])
         self.height = data['height']
 
