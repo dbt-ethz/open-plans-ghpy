@@ -87,6 +87,7 @@ class OpenPlansItem:
         self.level = data['floor']
         self.geolocation = self.format_geolocation(data['geolocation'])
         self.height = data['height']
+        self.projectURL = 'https://plans.arch.ethz.ch/#/project/{}'.format(data['project_id'])
 
             
     def get_polygon_area(self):
