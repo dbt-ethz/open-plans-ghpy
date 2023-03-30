@@ -113,9 +113,12 @@ class OpenPlansItem:
     @staticmethod
     def format_geolocation(data):
         if data:
-            point_str = data.replace('POINT(', '').replace(')', '')
-            longitude, latitude = point_str.split(' ')
-            return '{}  {}'.format(latitude, longitude)
+            try:
+                point_str = data.replace('POINT(', '').replace(')', '')
+                longitude, latitude = point_str.split(' ')
+                return '{}  {}'.format(latitude, longitude)
+            except:
+                return None
         return None
 
 
