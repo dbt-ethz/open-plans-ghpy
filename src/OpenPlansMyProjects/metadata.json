@@ -1,0 +1,77 @@
+{
+    "name": "OpenPlansMyAccount",
+    "nickname": "userLogin",
+    "category": "OpenPlans",
+    "subcategory": "Database",
+    "description": "User login for Open Plans to fetch my projects.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "email",
+                "nickname": "email",
+                "description": "Your Open Plans account email.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str"
+            },
+            {
+                "name": "password",
+                "nickname": "password",
+                "description": "Your Open Plans account password.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str"
+            },
+            {
+                "name": "authentication",
+                "nickname": "auth",
+                "description": "(default: true). Set false to logout and true to login",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "message",
+                "nickname": "message",
+                "description": "info about login attempt.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "myProjects",
+                "nickname": "myProjects",
+                "description": "List of open plans projects as dictionaries (not readable by Grasshopper).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "myCollections",
+                "nickname": "myCollections",
+                "description": "List of Open Plans Collections.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

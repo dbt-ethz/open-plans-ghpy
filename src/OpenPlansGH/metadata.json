@@ -2,7 +2,7 @@
     "name": "OpenPlansGH",
     "nickname": "openplans",
     "category": "OpenPlans",
-    "subcategory": "Search",
+    "subcategory": "Database",
     "description": "Retrieve data from Open Plans with geometrical search.",
     "exposure": 4,
 

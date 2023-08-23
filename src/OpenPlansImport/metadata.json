@@ -1,0 +1,51 @@
+{
+    "name": "OpenPlansImport",
+    "nickname": "Import",
+    "category": "OpenPlans",
+    "subcategory": "Database",
+    "description": "Load a single Open Plans plan into Rhino/Grasshopper.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "PlanID",
+                "nickname": "PlanID",
+                "description": "Open Plans Plan Identifier. HINT: Find the ID on plans.arch.ethz.ch.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            },
+            {
+                "name": "importToRhino",
+                "nickname": "importToRhino",
+                "description": "If true, the plan is imported into the rhino viewport.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "OpenPlansPlan",
+                "nickname": "OpenPlansPlan",
+                "description": "Open Plans Plan object.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "name": "OpenPlansExport",
+    "nickname": "Export",
+    "category": "OpenPlans",
+    "subcategory": "Database",
+    "description": "Export a single Plan to the Open Plans database.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "OpenPlansPlan",
+                "nickname": "OpenPlansPlan",
+                "description": "Open Plans Plan.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0
+            },
+            {
+                "name": "export",
+                "nickname": "export",
+                "description": "Set to true to export plan to Open Plans database.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "message",
+                "nickname": "message",
+                "description": "Log output of export.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

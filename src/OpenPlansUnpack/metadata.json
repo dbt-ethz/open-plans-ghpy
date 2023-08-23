@@ -2,7 +2,7 @@
     "name": "OpenPlansUnpack",
     "nickname": "unpack",
     "category": "OpenPlans",
-    "subcategory": "Data",
+    "subcategory": "Util",
     "description": "Unpack projects data from open plans.",
     "exposure": 4,
 
@@ -14,9 +14,9 @@
         "iconDisplay": 2,
         "inputParameters": [
             {
-                "name": "projects",
-                "nickname": "projects",
-                "description": "List of projects as python dictionaries.",
+                "name": "OpenPlansData",
+                "nickname": "OpenPlansData",
+                "description": "Open Plans data in the form of an dict or class instance.",
                 "optional": false,
                 "allowTreeAccess": true,
                 "showTypeHints": true,
@@ -28,8 +28,15 @@
         "outputParameters": [
             {
                 "name": "properties",
-                "nickname": "projectProperties",
-                "description": "Property values from open plans projects (readable by Grasshopper in tree structure).",
+                "nickname": "properties",
+                "description": "Property values from open plans data (readable by Grasshopper in tree structure).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "keys",
+                "nickname": "keys",
+                "description": "Keys from open plans data input.",
                 "optional": false,
                 "sourceCount": 0
             }

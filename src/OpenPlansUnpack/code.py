@@ -16,20 +16,26 @@ Unpack projects data from Open Plans GH.
 from ghpythonlib.componentbase import executingcomponent as component
 import ghpythonlib.treehelpers as th
 
+def is_user_defined_instance(obj):
+    return isinstance(obj, object) and not isinstance(obj, (type(None), type, dict, list, tuple, str))
 
 class OpenPlansUnpack(component):
 
-    def RunScript(self, projects):
-
-        if not projects:
+    def RunScript(self, OpenPlansData):
+        
+        if not OpenPlansData:
             return None
 
-        if type(projects) != list:
-            raise Exception("projects must be of type list")
+        if type(OpenPlansData) != list:
+            raise Exception("OpenPlansData must be of type list")
         
-        if type(projects[0]) != dict:
-            raise Exception("projects must contain python dictionaries")
+        data = [i.attributes if is_user_defined_instance(i) else i for i in OpenPlansData]
 
-        properties = th.list_to_tree( [p.values() for p in projects] )
+        for i in data:
+            if type(i) != dict:
+                raise Exception("OpenPlansData must contain python dictionaries")
 
-        return properties
+        properties = th.list_to_tree( [p.values() for p in data] )
+        keys = data[0].keys()
+
+        return properties, keys

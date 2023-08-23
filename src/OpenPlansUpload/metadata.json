@@ -1,0 +1,52 @@
+{
+    "name": "OpenPlansUpload",
+    "nickname": "Upload",
+    "category": "OpenPlans",
+    "subcategory": "Plan",
+    "description": "Upload polygons to an existing Open Plans project plan.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "project",
+                "nickname": "project",
+                "description": "Select the project id you want to edit. HINT: use the my-projects-dropdown-menu to select a project.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            },
+            {
+                "name": "level",
+                "nickname": "level",
+                "description": "Select the floor plan level of the project.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            }
+
+        ],
+        "outputParameters": [
+            {
+                "name": "message",
+                "nickname": "message",
+                "description": "info.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

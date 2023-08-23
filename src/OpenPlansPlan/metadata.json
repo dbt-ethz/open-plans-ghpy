@@ -1,0 +1,49 @@
+{
+    "name": "OpenPlansPlan",
+    "nickname": "Plan",
+    "category": "OpenPlans",
+    "subcategory": "Edit",
+    "description": "Open Plans Plan (i.e. floor plan of one level).",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "OpenPlansPlan",
+                "nickname": "OpenPlansPlan",
+                "description": "Open Plans Plan object. HINT: use Open Plans Import to retrieve a plan.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0
+            },
+            {
+                "name": "addPolygons",
+                "nickname": "addPolygons",
+                "description": "List of Open Plans Polygons.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "list",
+                "wireDisplay": "default",
+                "sourceCount": 0
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "OpenPlansPlan",
+                "nickname": "OpenPlansPlan",
+                "description": "Open Plans Plan object.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
