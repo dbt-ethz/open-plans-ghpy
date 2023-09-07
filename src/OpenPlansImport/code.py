@@ -8,6 +8,8 @@ import urllib2
 from urllib2 import HTTPError, URLError
 import json
 import copy
+import tempfile
+import os
 
 from ghpythonlib.componentbase import executingcomponent as component
 import Rhino.Display as rd
@@ -187,7 +189,9 @@ def add_polygon_rhino_layers(plan):
 
 class OpenPlansPlanObj:
 
-    def __init__(self, data_fields=copy.deepcopy(PLAN_FIELDS)):
+    def __init__(self, data_fields=None):
+        if data_fields is None:
+            data_fields = copy.deepcopy(PLAN_FIELDS)
         self.__plan = data_fields
 
     @classmethod
@@ -266,10 +270,11 @@ class OpenPlansPlanObj:
                 for poly in self.plan['polygons']]
 
     def add_polygon(self, polygon):
-        if isinstance(polygon, OpenPlansPolygon):
-            self.__plan['polygons'].append(polygon.polygon)
-        elif type(polygon) is dict:
-            self.__plan['polygons'].append(polygon)
+        if type(polygon) is dict:
+            data = polygon.copy()
+            self.__plan['polygons'].append(data)
+        else:
+            ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, "No polygons have been added to the plan")
         return self
 
     def remove_empty_values(self, data=None):
@@ -294,36 +299,31 @@ class OpenPlansPlanObj:
         self.__plan['polygons'] = []
     
     def draw_image_plan(self):
-        # Rhino Bitmap
-        bitmap = rd.DisplayBitmap.Load(self.image_path)
 
-        def get_file_location_image():
-            return rs.OpenFileName("File location for floorplan image", "JPEG Files (*.jpeg)|*.jpeg||")
-
-        def export_image(img_url, filepath):
+        def read_image_url(img_url):
             response = urllib2.urlopen(img_url)
-            output = open(filepath, "wb")
-            output.write(response.read())
-            output.close()
+            return response.read()
+        # try:
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".jpeg")
+        temp_file.write(read_image_url(self.image_path))
+        temp_file.close()
+            
+        RhinoDocument = Rhino.RhinoDoc.ActiveDoc
+        view = RhinoDocument.Views.Find("Top", False)
 
-        fpath = get_file_location_image()
+        plane = view.ActiveViewport.ConstructionPlane()
 
-        if fpath:
-            export_image(self.image_path, fpath)
-            # get active view
-            RhinoDocument = Rhino.RhinoDoc.ActiveDoc
-            view = RhinoDocument.Views.Find("Top", False)
+        # load image into Rhino view
+        view.ActiveViewport.SetTraceImage(
+            temp_file.name, plane, self.width_mm, self.height_mm, True, False)
+        view.Redraw()
 
-            plane = view.ActiveViewport.ConstructionPlane()
+        os.remove(temp_file.name)
 
-            # load image into Rhino view
-            view.ActiveViewport.SetTraceImage(
-                fpath, plane, self.width_mm, self.height_mm, True, False)
-            view.Redraw()
-
-        else:
-            ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, 'Background image can not be displayed. Please export image to your device')
-            print('Background image can not be displayed. Please export image to your device')
+        # except:
+        #     ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, 
+        #                                       'Image cannot be displayed')
+            
 
 class Polygon:
 
@@ -341,66 +341,6 @@ class Polygon:
                            for p in data])
 
 
-class OpenPlansPolygon:
-
-    def __init__(self, data_fields=copy.deepcopy(POLYGON_FIELDS)):
-        self.__polygon = data_fields
-
-    @classmethod
-    def from_data(cls, data):
-        """Construct a Open Plans polygon from its api data representation.
-
-        Parameters
-        ----------
-        data : dict
-            The data dictionary.
-
-        Returns
-        -------
-        :class:`OpenPlansPolygon`
-            The constructed dataclass.
-        """
-        return cls(data_fields={k: v for k, v in data.iteritems() if k in POLYGON_FIELDS})
-
-    @classmethod
-    def from_polygon_id(cls, id):
-        pass
-
-    @property
-    def polygon(self):
-        return self.__polygon
-
-    @property
-    def polygon_id(self):
-        return self.polygon['id']
-
-    @property
-    def plan_id(self):
-        return self.polygon['plan_id']
-
-    @property
-    def tags(self):
-        return self.polygon['tags']
-
-    @property
-    def points(self):
-        return self.polygon['points']
-
-    @property
-    def polygon_id_string(self):
-        return "tags: {}; ID: {}".format(self.tags, self.polygon_id)
-
-    @property
-    def attributes(self):
-        return {k: v for k, v in self.polygon.iteritems() if k not in ['points']}
-
-    def add_polygon_tag(self, tag):
-        self.__polygon['tags'].append(tag)
-
-    def rhino_polygon(self, frame_height=0):
-        return Polygon.from_data(data=self.points, move_y=frame_height)
-    
-
 
 class OpenPlansImport(component):
 
@@ -414,7 +354,7 @@ class OpenPlansImport(component):
         if plan:
             if importToRhino:
                 plan.draw_image_plan()
-                if plan.polygons:
-                    project_to_rhino_layers(plan=plan, plan_id=planID)
+                # if plan.polygons:
+                #     project_to_rhino_layers(plan=plan, plan_id=planID)
 
         return plan

@@ -35,6 +35,18 @@
                 "wireDisplay": "default",
                 "sourceCount": 0,
                 "typeHintID": "bool"
+            },
+            {
+                "name": "keepExistingPolygons",
+                "nickname": "keepExistingPolyons",
+                "description": "Default: False. If false, all polygons related to this plan are removed before new polygons are saved. If true, polygons from database are kept and new polygons are added.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool"
             }
         ],
         "outputParameters": [

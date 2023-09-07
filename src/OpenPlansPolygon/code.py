@@ -17,9 +17,11 @@ POLYGON_FIELDS = {
 }
 
 
-class OpenPlansPolygon:
+class OpenPlansPolygonObj:
 
-    def __init__(self, data_fields=copy.deepcopy(POLYGON_FIELDS)):
+    def __init__(self, data_fields=None):
+        if data_fields is None:
+            data_fields = copy.deepcopy(POLYGON_FIELDS)
         self.__polygon = data_fields
 
     @classmethod
@@ -76,7 +78,7 @@ class OpenPlansPolygon:
     def clear_tags(self):
         self.__polygon['tags'] = []
     
-    def rhino_curve_to_data_points(self, obj, move_y=0):
+    def rhino_curve_to_data_points(self, obj, move_y=None):
         """Set Rhino document user text.
 
         Parameters
@@ -107,16 +109,19 @@ class OpenPlansImport(component):
 
     def RunScript(self, polyline, tags):
         
-        polygon = None
+        OpenPlansPolygon = []
         
-        if polyline:
-            polygon = OpenPlansPolygon()
-            polygon.rhino_curve_to_data_points(obj=polyline)
-
-            if polygon:
+        for p in polyline:
+            if p:
+                polygon = OpenPlansPolygonObj()
+                
+                polygon.rhino_curve_to_data_points(obj=p)
+    
                 if tags:
                     polygon.clear_tags()
                     for tag in tags:
                         polygon.add_polygon_tag(tag=tag)
+                        
+                OpenPlansPolygon.append(polygon)
 
-        return polygon
+        return OpenPlansPolygon

@@ -14,7 +14,7 @@ from ghpythonlib.componentbase import executingcomponent as component
 import scriptcontext as rs
 import Grasshopper.Kernel as gh
 
-URI = "https://open-plans.herokuapp.com/"
+BASE_URL = "https://open-plans.herokuapp.com/"
 
 rs.sticky['resp'] = {'succeeded': 0, 'error':''}
 
@@ -24,8 +24,27 @@ PROJECT_UPLOAD = {
     'plans': []
 }
 
+def make_request(url):
+    try:
+        response = urllib2.urlopen(url)
+        json_string = response.read().decode('utf-8')
+        return dict(json.loads(json_string))
+    except HTTPError as e:
+        ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, "HTTP Error: {}".format(e.code))
+        return {"succeeded": 0, "error": "HTTP Error: {}".format(e.code)}
+    except URLError as e:
+        ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, "URL Error: {}".format(e.reason))
+        return {"succeeded": 0, "error": "URL Error: {}".format(e.reason)}
+    except Exception as e:
+        ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, "An error occurred: {}".format(e))
+        return {"succeeded": 0, "error": "An error occurred: {}".format(e)}
+
+def fetch_plan(plan_id):
+    url = BASE_URL + 'plan/fetch/{}'.format(plan_id)
+    return make_request(url)
+
 def save_project(project):
-    url = URI + 'project/save'
+    url = BASE_URL + 'project/save'
     data = json.dumps(project)
     print(data)
     req = urllib2.Request(url, data=data, headers={
@@ -43,28 +62,29 @@ def save_project(project):
             return {"succeeded": 0, "error": "HTTP Error: {}".format(e.code)}
 
 def fetch_project(project_id):
-    url = URI + 'project/fetch/{}'.format(project_id)
-    req = urllib2.Request(url)
+    url = BASE_URL + 'project/fetch/{}'.format(project_id)
+    return make_request(url)
 
-    try:
-        response = urllib2.urlopen(req)
-        json_string = response.read().decode('utf-8')
-        retVal = dict(json.loads(json_string))
-        return retVal
-    except HTTPError as e:
-        return {"succeeded": 0, "error": e}
-
+def get_polygon_ids(plan_dict):
+    return [ p['id'] for p in plan_dict['polygons'] ]
 
 class OpenPlansExport(component):
 
-    def RunScript(self, OpenPlansPlan, export):
+    def RunScript(self, OpenPlansPlan, export, keepExistingPolygons=False):
 
         if OpenPlansPlan:
+            print(keepExistingPolygons)
             data_fields=copy.deepcopy(PROJECT_UPLOAD)
             project = fetch_project(project_id=OpenPlansPlan.project_id)
+            plan = fetch_plan(plan_id=OpenPlansPlan.plan_id)
+            polygon_ids = get_polygon_ids(plan_dict=plan['plan'])
             data_fields['id'] = OpenPlansPlan.project_id
             data_fields['name'] = project['project']['name']
             plan_data = OpenPlansPlan.remove_empty_values()
+            plan_data['deleted_polygon_ids'] = polygon_ids
+            if keepExistingPolygons is True:
+                plan_data['deleted_polygon_ids'] = []
+                
             data_fields['plans'].append(plan_data)
             if export:
                 resp = save_project(project=data_fields)
@@ -76,5 +96,4 @@ class OpenPlansExport(component):
                 print(rs.sticky['resp']['error'])
                 ghenv.Component.AddRuntimeMessage(gh.GH_RuntimeMessageLevel.Warning, rs.sticky['resp']['error'])
                 return rs.sticky['resp']['error']
-
-
+            
