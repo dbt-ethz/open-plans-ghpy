@@ -66,7 +66,10 @@ def fetch_project(project_id):
     return make_request(url)
 
 def get_polygon_ids(plan_dict):
-    return [ p['id'] for p in plan_dict['polygons'] ]
+    try:
+        return [ p['id'] for p in plan_dict['polygons'] ]
+    except:
+        return None
 
 class OpenPlansExport(component):
 
@@ -81,9 +84,10 @@ class OpenPlansExport(component):
             data_fields['id'] = OpenPlansPlan.project_id
             data_fields['name'] = project['project']['name']
             plan_data = OpenPlansPlan.remove_empty_values()
-            plan_data['deleted_polygon_ids'] = polygon_ids
-            if keepExistingPolygons is True:
-                plan_data['deleted_polygon_ids'] = []
+            if polygon_ids:
+                plan_data['deleted_polygon_ids'] = polygon_ids
+                if keepExistingPolygons is True:
+                    plan_data['deleted_polygon_ids'] = []
                 
             data_fields['plans'].append(plan_data)
             if export:

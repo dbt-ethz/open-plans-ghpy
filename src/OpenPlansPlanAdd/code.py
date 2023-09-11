@@ -14,7 +14,7 @@ class OpenPlansPlanAdd(component):
         
         edit_polygons_to_add = []
         
-        if addPolygons:
+        if addPolygons and OpenPlansPlan:
             OpenPlansPlan.clear_polygons()
             edit_polygons_to_add = [ copy.deepcopy(p) for p in addPolygons ]
             
