@@ -302,7 +302,7 @@ class OpenPlansPlanObj:
     @property
     def geometry(self):
         if self.plan['points']:
-            return [ (x, y*-1 + 0) for x, y in self.plan['points'] ]
+            return [ (x, y*-1 + self.height_mm) for x, y in self.plan['points'] ]
 
     def get_project_id(self):
         return get_data(dict=fetch_plan(plan_id=self.plan_id), key='plan')['project_id']
