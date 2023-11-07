@@ -14,8 +14,8 @@
         "iconDisplay": 2,
         "inputParameters": [
             {
-                "name": "PlanID",
-                "nickname": "PlanID",
+                "name": "planID",
+                "nickname": "planID",
                 "description": "Open Plans Plan Identifier. HINT: Find the ID on plans.arch.ethz.ch.",
                 "optional": false,
                 "allowTreeAccess": false,

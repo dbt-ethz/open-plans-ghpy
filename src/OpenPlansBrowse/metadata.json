@@ -1,0 +1,82 @@
+{
+    "name": "OpenPlansBrowse",
+    "nickname": "Browse",
+    "category": "OpenPlans",
+    "subcategory": "Database",
+    "description": "Browse and filter the Open Plans database.",
+    "exposure": 4,
+
+    "ghpython": {
+        "hideOutput": true,
+        "hideInput": true,
+        "isAdvancedMode": true,
+        "marshalOutGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "textFilter",
+                "nickname": "text",
+                "description": "text based filter for Open Plans projects. Search project name, architects, description, source, civil engineers and clients.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str"
+            },
+            {
+                "name": "yearOfCompletionFilter",
+                "nickname": "year",
+                "description": "Filter Open Plans projects based on year of construction. Use GH Interval to set 'year from' and 'year to'",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "Interval"
+            },
+            {
+                "name": "numberPerPage",
+                "nickname": "number",
+                "description": "Number of returns from request.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            },
+            {
+                "name": "page",
+                "nickname": "page",
+                "description": "Page number to browse to list of plans.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "OpenPlansPlans",
+                "nickname": "OpenPlansPlans",
+                "description": "Open Plans Plan objects.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "geometry",
+                "nickname": "geometry",
+                "description": "Open Plans Polygon geometries as Rhino PolylineCurve.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
