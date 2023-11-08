@@ -15,7 +15,7 @@
         "inputParameters": [
             {
                 "name": "textFilter",
-                "nickname": "text",
+                "nickname": "textFilter",
                 "description": "text based filter for Open Plans projects. Search project name, architects, description, source, civil engineers and clients.",
                 "optional": true,
                 "allowTreeAccess": false,
@@ -27,7 +27,7 @@
             },
             {
                 "name": "yearOfCompletionFilter",
-                "nickname": "year",
+                "nickname": "yearOfCompletionFilter",
                 "description": "Filter Open Plans projects based on year of construction. Use GH Interval to set 'year from' and 'year to'",
                 "optional": true,
                 "allowTreeAccess": false,
@@ -39,7 +39,7 @@
             },
             {
                 "name": "numberPerPage",
-                "nickname": "number",
+                "nickname": "numberPerPage",
                 "description": "Number of returns from request.",
                 "optional": true,
                 "allowTreeAccess": false,

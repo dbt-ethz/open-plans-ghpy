@@ -92,29 +92,9 @@ def fetch_plan(plan_id):
     url = BASE_URL + 'plan/fetch/{}'.format(plan_id)
     return make_request(url)
 
-def fetch_plans(plan_ids):
-    idstring = '&'.join(['ids[]={}'.format(id) for id in plan_ids])
-    url = BASE_URL + 'plan/fetch?{}'.format(idstring)
-    return make_request(url)
-    
-def fetch_project(project_id):
-    url = BASE_URL + 'project/fetch/{}'.format(project_id)
-    return make_request(url)
-
-def fetch_polygons_by_plan_ids(plan_ids):
-    idstring = '&'.join(['ids[]={}'.format(id) for id in plan_ids])
-    url = BASE_URL + 'polygon/fetch?{}'.format(idstring)
-    return make_request(url)  
-
-def fetch_recent_projects(number=5, page=0):
-    if number > 10:
-        number = 10
-    url = BASE_URL + 'project/fetch/recent?number={}&page={}'.format(number, page)
-    return make_request(url)
-
-def filter_fetch_projects(text=None, year_domain=None, number=5, page=0):
-    if number > 10:
-        number = 10
+def filter_fetch_polygons(number, page, text=None, year_domain=None):
+    if number > 100:
+        number = 100
     params = {}
     if text is not None:
         params['search'] = text.replace('\r\n', '')
@@ -127,7 +107,7 @@ def filter_fetch_projects(text=None, year_domain=None, number=5, page=0):
         params['page'] = int(page)
     
     query_string = '&'.join(['{}={}'.format(key, value) for key, value in params.items()])
-    url = BASE_URL + 'project/fetch/filter?{}'.format(query_string)
+    url = BASE_URL + 'polygon/fetch/filter?{}'.format(query_string)
     return make_request(url)
 
 def add_parent_layer(lname, attr=None):
@@ -392,16 +372,13 @@ class OpenPlansBrowse(component):
         plans = []
         geometry = []
         
+        if not numberPerPage:
+            numberPerPage = 10
+        if not page:
+            page = 0
+        
         if textFilter or yearOfCompletionFilter:
-            projects = filter_fetch_projects(textFilter, yearOfCompletionFilter, numberPerPage, page)
-            planids = [p['id'] for sublist in projects['projects'] for p in sublist['plans']]
-
-        else:
-            projects = fetch_recent_projects(numberPerPage, page)
-            planids = [p['id'] for sublist in projects['projects'] for p in sublist['plans']]
-
-        if planids:
-            plandata = fetch_polygons_by_plan_ids(planids)
+            plandata = filter_fetch_polygons(number=numberPerPage, page=page, text=textFilter, year_domain=yearOfCompletionFilter)
             plans = [ OpenPlansPlanObj.from_data(d) for d in plandata['plans'] ]
         
             polygons = []
