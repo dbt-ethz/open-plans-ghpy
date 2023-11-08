@@ -379,12 +379,13 @@ class OpenPlansBrowse(component):
         
         if textFilter or yearOfCompletionFilter:
             plandata = filter_fetch_polygons(number=numberPerPage, page=page, text=textFilter, year_domain=yearOfCompletionFilter)
-            plans = [ OpenPlansPlanObj.from_data(d) for d in plandata['plans'] ]
-        
-            polygons = []
-            for polygon in [p.geometry for p in plans]:
-                polygons.append([ rg.Point3d(p[0], p[1], 0) for p in polygon])
-            geometry = [ rg.PolylineCurve(pts) for pts in polygons ]
+            if plandata['succeeded'] == 1:
+                plans = [ OpenPlansPlanObj.from_data(d) for d in plandata['plans'] ]
+            
+                polygons = []
+                for polygon in [p.geometry for p in plans]:
+                    polygons.append([ rg.Point3d(p[0], p[1], 0) for p in polygon])
+                geometry = [ rg.PolylineCurve(pts) for pts in polygons ]
 
         # if plan:
         #     if importToRhino:
