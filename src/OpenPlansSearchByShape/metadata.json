@@ -1,6 +1,6 @@
 {
     "name": "Open Plans Search By Shape",
-    "nickname": "search-by-shape",
+    "nickname": "OpenPlansSearchByShape",
     "category": "OpenPlans",
     "subcategory": "Database",
     "description": "Retrieve data from Open Plans with a single geometrical search.",
