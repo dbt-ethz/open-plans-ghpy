@@ -1,5 +1,5 @@
 {
-    "name": "OpenPlansUnpack",
+    "name": "Open Plans Unpack",
     "nickname": "unpack",
     "category": "OpenPlans",
     "subcategory": "Util",
@@ -28,15 +28,15 @@
         "outputParameters": [
             {
                 "name": "properties",
-                "nickname": "properties",
-                "description": "Property values from open plans data (readable by Grasshopper in tree structure).",
+                "nickname": "projectProperties",
+                "description": "Property values from open plans projects (readable by Grasshopper in tree structure).",
                 "optional": false,
                 "sourceCount": 0
             },
             {
-                "name": "keys",
-                "nickname": "keys",
-                "description": "Keys from open plans data input.",
+                "name": "propertyNames",
+                "nickname": "projectFields",
+                "description": "Project property field names from open plans projects (readable by Grasshopper in list).",
                 "optional": false,
                 "sourceCount": 0
             }

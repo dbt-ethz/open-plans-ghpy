@@ -1,9 +1,9 @@
 {
-    "name": "OpenPlansGH",
-    "nickname": "openplans",
+    "name": "Open Plans Search Multiple Shapes",
+    "nickname": "search-multiple-shapes",
     "category": "OpenPlans",
     "subcategory": "Database",
-    "description": "Retrieve data from Open Plans with geometrical search.",
+    "description": "Retrieve data from Open Plans with multiple geometrical searches. For each search shape one plan is returned with the highest similarity",
     "exposure": 4,
 
     "ghpython": {
@@ -14,28 +14,16 @@
         "iconDisplay": 2,
         "inputParameters": [
             {
-                "name": "searchShape",
-                "nickname": "searchShape",
-                "description": "Closed Polyline as building outline to find similar plans.",
+                "name": "searchShapes",
+                "nickname": "searchShapes",
+                "description": "Closed Polylines as building outlines to find similar plans.",
                 "optional": false,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
-                "scriptParamAccess": "item",
-                "wireDisplay": "faint",
+                "scriptParamAccess": "list",
+                "wireDisplay": "default",
                 "sourceCount": 0,
                 "typeHintID": "polyline"
-            },
-            {
-                "name": "numberOfPlans",
-                "nickname": "numberOfPlans",
-                "description": "Value between 1 and 100; number of plans to retrieve.",
-                "optional": true,
-                "allowTreeAccess": false,
-                "showTypeHints": true,
-                "scriptParamAccess": "item",
-                "wireDisplay": "faint",
-                "sourceCount": 0,
-                "typeHintID": "int"
             }
         ],
         "outputParameters": [

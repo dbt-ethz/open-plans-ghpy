@@ -36,6 +36,6 @@ class OpenPlansUnpack(component):
                 raise Exception("OpenPlansData must contain python dictionaries")
 
         properties = th.list_to_tree( [p.values() for p in data] )
-        keys = data[0].keys()
+        projectFields = data[0].keys()
 
-        return properties, keys
+        return properties, projectFields

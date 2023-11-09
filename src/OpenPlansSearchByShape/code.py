@@ -27,6 +27,7 @@ Retrieve floor plans from the Open Plans database with a geometircal search.
 import urllib2
 from urllib2 import HTTPError
 import json
+from collections import OrderedDict
 
 # GHPYTHON SDK IMPORTS
 from ghpythonlib.componentbase import executingcomponent as component
@@ -38,7 +39,7 @@ class OpenPlansSearch:
 
     def __init__(self, search_shape, number_of_plans):
         self.searchShape = search_shape
-        self.numberOfPlans = number_of_plans if number_of_plans else 20
+        self.numberOfPlans = number_of_plans if number_of_plans else 10
         self.uri = "https://open-plans.herokuapp.com/"
         self.similarPlans = self.api_search_by_shape()
         self.openPlansItems = []
@@ -76,6 +77,7 @@ class OpenPlansSearch:
 class OpenPlansItem:
     
     def __init__(self, data):
+        self.height_mm = data['height_mm']
         self.building_outline = self.building_outline_pts_to_rhino_geom(points=data['points'])
         self.name = data['name']
         self.architects = data['architects']
@@ -108,7 +110,7 @@ class OpenPlansItem:
         return polylineCrv
 
     def transform_to_rhino_coords(self, coordinate):
-        return list([coordinate[0], coordinate[1]*-1])
+        return list([coordinate[0], coordinate[1]*-1 + self.height_mm])
     
     @staticmethod
     def format_geolocation(data):
@@ -122,7 +124,7 @@ class OpenPlansItem:
         return None
 
 
-class OpenPlansGH(component):
+class OpenPlansSearchByShape(component):
 
     def RunScript(self, searchShape, numberOfPlans):
 
@@ -142,7 +144,7 @@ class OpenPlansGH(component):
                 raise Exception(' Not able to fetch projects from open plans ')
             
             if op.openPlansItems:
-                projects = [item.__dict__ for item in op.openPlansItems]
+                projects = [OrderedDict((key, value) for key, value in item.__dict__.items() if key != 'height_mm') for item in op.openPlansItems]
                 properties = th.list_to_tree( [p.values() for p in projects] )
                 propertyNames = projects[0].keys()
             

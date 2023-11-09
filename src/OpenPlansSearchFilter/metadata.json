@@ -1,9 +1,9 @@
 {
-    "name": "OpenPlansBrowse",
-    "nickname": "Browse",
+    "name": "Open Plans Search Filter",
+    "nickname": "filter",
     "category": "OpenPlans",
     "subcategory": "Database",
-    "description": "Browse and filter the Open Plans database.",
+    "description": "Search and filter the Open Plans database.",
     "exposure": 4,
 
     "ghpython": {
@@ -28,7 +28,7 @@
             {
                 "name": "yearOfCompletionFilter",
                 "nickname": "yearOfCompletionFilter",
-                "description": "Filter Open Plans projects based on year of construction. Use GH Interval to set 'year from' and 'year to'",
+                "description": "Filter Open Plans projects based on year of construction. Use GH Interval/Domain to set 'year from' and 'year to'",
                 "optional": true,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
@@ -38,21 +38,9 @@
                 "typeHintID": "interval"
             },
             {
-                "name": "numberPerPage",
-                "nickname": "numberPerPage",
-                "description": "Number of returns from request.",
-                "optional": true,
-                "allowTreeAccess": false,
-                "showTypeHints": true,
-                "scriptParamAccess": "item",
-                "wireDisplay": "default",
-                "sourceCount": 0,
-                "typeHintID": "int"
-            },
-            {
-                "name": "page",
-                "nickname": "page",
-                "description": "Page number to browse to list of plans.",
+                "name": "numberOfPlans",
+                "nickname": "numberOfPlans",
+                "description": "Value between 1 and 100; number of plans to retrieve.",
                 "optional": true,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
@@ -64,16 +52,23 @@
         ],
         "outputParameters": [
             {
-                "name": "OpenPlansPlans",
-                "nickname": "OpenPlansPlans",
-                "description": "Open Plans Plan objects.",
+                "name": "projects",
+                "nickname": "projects",
+                "description": "List of open plans projects as dictionaries (not readable by Grasshopper).",
                 "optional": false,
                 "sourceCount": 0
             },
             {
-                "name": "geometry",
-                "nickname": "geometry",
-                "description": "Open Plans Polygon geometries as Rhino PolylineCurve.",
+                "name": "properties",
+                "nickname": "projectProperties",
+                "description": "Property values from open plans projects (readable by Grasshopper in tree structure).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "propertyNames",
+                "nickname": "projectFields",
+                "description": "Project property field names from open plans projects (readable by Grasshopper in list).",
                 "optional": false,
                 "sourceCount": 0
             }
